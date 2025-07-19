@@ -1,0 +1,2 @@
+# NgoodN
+good news
