@@ -24,6 +24,7 @@ def save_users(users):
         json.dump(users, f)
 
 
+
 def get_chatgpt_message():
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
@@ -36,9 +37,16 @@ def get_chatgpt_message():
         "max_tokens": 200,
         "temperature": 0.7
     }
-    res = requests.post(url, headers=headers, json=data)
-    return res.json()['choices'][0]['message']['content']
 
+    res = requests.post(url, headers=headers, json=data)
+
+    try:
+        result = res.json()
+        return result['choices'][0]['message']['content']
+    except Exception as e:
+        print("OpenAI API Error:", res.status_code, res.text)
+        return "⚠️ متأسفانه مشکلی در دریافت خبر خوب از سرور پیش آمد."
+        
 
 def send_message(chat_id, text):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
