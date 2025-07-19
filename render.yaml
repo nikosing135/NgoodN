@@ -1,0 +1,18 @@
+
+services:
+  - type: web
+    name: ngoodn
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    autoDeploy: true
+    plan: free
+
+cronJobs:
+  - name: send-news-morning
+    schedule: "30 3 * * *"  # 7:00 صبح ایران = 3:30 UTC
+    command: curl $RENDER_EXTERNAL_URL/send-news
+
+  - name: send-news-afternoon
+    schedule: "30 10 * * *"  # 14:00 ایران = 10:30 UTC
+    command: curl $RENDER_EXTERNAL_URL/send-news
