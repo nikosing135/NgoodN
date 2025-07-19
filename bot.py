@@ -4,7 +4,8 @@ import requests
 from flask import Flask, request
 
 BOT_TOKEN = '8050978808:AAEJCWDQiBw9knVzxnhCsPeTf09bFxNkaVM'
-OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'
+import os
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 app = Flask(__name__)
 DATA_FILE = 'users.json'
